@@ -7,16 +7,17 @@
 
     <style>
         /* -------------------------------------- */
-        /* TUS ESTILOS ORIGINALES + BASE */
+        /* BASE Y ESTILOS ORIGINALES */
         /* -------------------------------------- */
+        
+        /* Estilos base para el footer al final de la página */
         body {
-            /* Aseguramos que haya espacio para el scroll y el ratón */
-            min-height: 100vh; /* CLAVE: Para que el footer llegue al final de la ventana */
+            min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+            position: relative; /* Clave para posicionar el footer */
             margin: 0;
             padding: 20px;
             font-family: sans-serif;
-            position: relative; /* CLAVE: Para posicionar el footer si el contenido es corto */
-            padding-bottom: 70px; /* Espacio para el footer fijo */
+            padding-bottom: 70px; /* Espacio para que el contenido no quede debajo del footer */
         }
         
         h1 {
@@ -29,23 +30,24 @@
             color: aliceblue;
             background-color: rgb(150, 44, 248);
             border: 3px black solid;
-            font-size: medium;
+            /* CAMBIO SOLICITADO: TAMAÑO ULTRAGRANDE */
+            font-size: 64px;
         }
 
         /* -------------------------------------- */
-        /* ESTILOS DEL FOOTER MEJORADO */
+        /* ESTILOS DEL FOOTER MEJORADO Y FIJO */
         /* -------------------------------------- */
         footer {
-            position: absolute; /* Posiciona respecto al body (que tiene position: relative) */
-            bottom: 0; /* Lo empuja al final de la página */
+            position: absolute; /* Posiciona respecto al body */
+            bottom: 0; /* Lo empuja al final */
             width: 100%;
             left: 0;
-            background-color: #333; /* Fondo oscuro y elegante */
+            background-color: #333; /* Fondo oscuro y profesional */
             color: #eee;
             text-align: center;
             padding: 15px 0;
             font-size: 0.9em;
-            border-top: 5px solid #6a0572; /* Línea de color de la mascota */
+            border-top: 5px solid #6a0572;
         }
 
         /* -------------------------------------- */
@@ -110,21 +112,23 @@
         </div>
     </div>
     <h1>HOLA Git XD !</h1>
-    <p>Este es mi primer ej. con CSS y Git.</p>
+    <p>Este es mi primer ej. con CSS y Git. ¡Los párrafos ahora son ultragrandes!</p>
 
     <h2>Subtítulo</h2>
-    <p>Segundo elemento de parrafo. Ahora el pie de página es más bonito y queda abajo.</p>
+    <p>Segundo elemento de parrafo.</p>
     <h1>¡HALA MADRID!</h1>
-    <footer>
-        **Pie de Página Mejorado** | Proyecto de experimento CSS + Git ~ Año 2025
+    
+    <footer> 
+        **~ Pie de Página de la Práctica-Examen ~** | Experimentando con CSS y JavaScript | Año 2025
     </footer>
-
+    
     <script>
         document.addEventListener('mousemove', (event) => {
             const pupilas = document.querySelectorAll('.pupila');
 
             pupilas.forEach(pupila => {
                 const ojo = pupila.parentElement;
+
                 const ojoRect = ojo.getBoundingClientRect();
                 const ojoX = ojoRect.left + ojoRect.width / 2;
                 const ojoY = ojoRect.top + ojoRect.height / 2;
