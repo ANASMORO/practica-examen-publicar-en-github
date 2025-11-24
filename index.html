@@ -7,18 +7,8 @@
 
     <style>
         /* -------------------------------------- */
-        /* TUS ESTILOS ORIGINALES + BASE */
+        /* TUS ESTILOS ORIGINALES */
         /* -------------------------------------- */
-        body {
-            /* Aseguramos que haya espacio para el scroll y el ratón */
-            min-height: 100vh; /* CLAVE: Para que el footer llegue al final de la ventana */
-            margin: 0;
-            padding: 20px;
-            font-family: sans-serif;
-            position: relative; /* CLAVE: Para posicionar el footer si el contenido es corto */
-            padding-bottom: 70px; /* Espacio para el footer fijo */
-        }
-        
         h1 {
             color: white;
             background-color: purple;
@@ -29,29 +19,39 @@
             color: aliceblue;
             background-color: rgb(150, 44, 248);
             border: 3px black solid;
-            font-size: medium;
+            /* CAMBIO SOLICITADO: TAMAÑO ULTRAGRANDE (64px) */
+            font-size: 64px;
         }
-
+        
         /* -------------------------------------- */
-        /* ESTILOS DEL FOOTER MEJORADO */
+        /* ESTILOS DE LA MASCOTA Y BASE */
         /* -------------------------------------- */
+        body {
+            /* ESTILOS CLAVE PARA EL FOOTER AL FINAL */
+            min-height: 100vh; /* Asegura la altura mínima de la ventana */
+            position: relative; /* Base para el position: absolute del footer */
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+            padding-bottom: 70px; /* Espacio para que el footer no tape contenido */
+        }
+        
+        /* ESTILOS DEL FOOTER MEJORADO Y FIJO AL FINAL */
         footer {
-            position: absolute; /* Posiciona respecto al body (que tiene position: relative) */
-            bottom: 0; /* Lo empuja al final de la página */
+            position: absolute; 
+            bottom: 0; /* Fija al final de la página */
             width: 100%;
             left: 0;
-            background-color: #333; /* Fondo oscuro y elegante */
+            background-color: #333; 
             color: #eee;
             text-align: center;
             padding: 15px 0;
             font-size: 0.9em;
-            border-top: 5px solid #6a0572; /* Línea de color de la mascota */
+            border-top: 5px solid #6a0572; /* Detalle de color */
         }
 
-        /* -------------------------------------- */
-        /* ESTILOS DE LA MASCOTA */
-        /* -------------------------------------- */
         #mascota-container {
+            /* Fija la posición en la ventana para que no se mueva con el scroll */
             position: fixed; 
             top: 150px; 
             left: 50%;
@@ -62,7 +62,7 @@
         #mascota-cuerpo {
             width: 120px;
             height: 80px;
-            background-color: #6a0572;
+            background-color: #6a0572; /* Color morado para el cuerpo */
             border-radius: 50% / 30%; 
             position: relative;
             display: flex;
@@ -93,7 +93,7 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%); 
-            transition: transform 0.1s linear;
+            transition: transform 0.1s linear; /* Suavizar el movimiento */
         }
     </style>
 </head>
@@ -110,37 +110,41 @@
         </div>
     </div>
     <h1>HOLA Git XD !</h1>
-    <p>Este es mi primer ej. con CSS y Git.</p>
+    <p>Este es mi primer ej. con CSS y Git</p>
 
     <h2>Subtítulo</h2>
-    <p>Segundo elemento de parrafo. Ahora el pie de página es más bonito y queda abajo.</p>
+    <p>Segundo elemento de parrafo</p>
     <h1>¡HALA MADRID!</h1>
-    <footer>
-        **Pie de Página Mejorado** | Proyecto de experimento CSS + Git ~ Año 2025
-    </footer>
-
+    <footer> Este es el pie de página ~ Año 2005 </footer>
     <script>
         document.addEventListener('mousemove', (event) => {
             const pupilas = document.querySelectorAll('.pupila');
 
             pupilas.forEach(pupila => {
                 const ojo = pupila.parentElement;
+
+                // 1. Obtener el centro del ojo
                 const ojoRect = ojo.getBoundingClientRect();
                 const ojoX = ojoRect.left + ojoRect.width / 2;
                 const ojoY = ojoRect.top + ojoRect.height / 2;
 
+                // 2. Posición del ratón
                 const mouseX = event.clientX;
                 const mouseY = event.clientY;
 
+                // 3. Calcular el ángulo para apuntar al ratón
                 const deltaX = mouseX - ojoX;
                 const deltaY = mouseY - ojoY;
                 const angle = Math.atan2(deltaY, deltaX);
 
+                // 4. Límite de movimiento de la pupila
                 const maxMove = ojo.offsetWidth / 4; 
 
+                // 5. Calcular la nueva posición (X, Y) dentro del ojo
                 const pupilaX = Math.cos(angle) * maxMove;
                 const pupilaY = Math.sin(angle) * maxMove;
 
+                // 6. Aplicar la transformación de movimiento
                 pupila.style.transform = `translate(-50%, -50%) translate(${pupilaX}px, ${pupilaY}px)`;
             });
         });
