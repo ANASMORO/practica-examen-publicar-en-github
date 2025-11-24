@@ -1,31 +1,136 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Mi experimento CSS + Git</title>
-    <style>
-      h1 {
-        color: white;
-        background-color: purple;
-        border: 1px solid black;
-      }
 
-      p {
-        color: aliceblue;
-        background-color: rgb(150, 44, 248);
-        border: 3px black solid;
-        font-size: medium;
-      }
+    <style>
+        /* -------------------------------------- */
+        /* TUS ESTILOS ORIGINALES */
+        /* -------------------------------------- */
+        h1 {
+            color: white;
+            background-color: purple;
+            border: 1px solid black;
+        }
+
+        p {
+            color: aliceblue;
+            background-color: rgb(150, 44, 248);
+            border: 3px black solid;
+            font-size: medium;
+        }
+        
+        /* -------------------------------------- */
+        /* ESTILOS DE LA MASCOTA AÑADIDOS */
+        /* -------------------------------------- */
+        body {
+            /* Aseguramos que haya espacio para el scroll y el ratón */
+            min-height: 200vh; 
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+        }
+
+        #mascota-container {
+            /* Fija la posición en la ventana para que no se mueva con el scroll */
+            position: fixed; 
+            top: 150px; /* Posición más baja para no interferir con el H1 */
+            left: 50%;
+            transform: translateX(-50%); 
+            z-index: 1000;
+        }
+
+        #mascota-cuerpo {
+            width: 120px;
+            height: 80px;
+            background-color: #6a0572; /* Color morado para el cuerpo */
+            border-radius: 50% / 30%; 
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        .ojo {
+            width: 35px;
+            height: 35px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pupila {
+            width: 15px;
+            height: 15px;
+            background-color: #333;
+            border-radius: 50%;
+            position: absolute; 
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%); 
+            transition: transform 0.1s linear; /* Suavizar el movimiento */
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+
+    <div id="mascota-container">
+        <div id="mascota-cuerpo">
+            <div class="ojo izquierdo">
+                <div class="pupila"></div>
+            </div>
+            <div class="ojo derecho">
+                <div class="pupila"></div>
+            </div>
+        </div>
+    </div>
     <h1>HOLA Git XD !</h1>
     <p>Este es mi primer ej. con CSS y Git</p>
 
     <h2>Subtítulo</h2>
     <p>Segundo elemento de parrafo</p>
-	<h1>¡HALA MADRID!</h1>
-	<footer> Este es el pie de página ~ Año 2005 </footer>
-  </body>
+    <h1>¡HALA MADRID!</h1>
+    <footer> Este es el pie de página ~ Año 2005 </footer>
+    <script>
+        document.addEventListener('mousemove', (event) => {
+            const pupilas = document.querySelectorAll('.pupila');
+
+            pupilas.forEach(pupila => {
+                const ojo = pupila.parentElement;
+
+                // 1. Obtener el centro del ojo
+                const ojoRect = ojo.getBoundingClientRect();
+                const ojoX = ojoRect.left + ojoRect.width / 2;
+                const ojoY = ojoRect.top + ojoRect.height / 2;
+
+                // 2. Posición del ratón
+                const mouseX = event.clientX;
+                const mouseY = event.clientY;
+
+                // 3. Calcular el ángulo para apuntar al ratón
+                const deltaX = mouseX - ojoX;
+                const deltaY = mouseY - ojoY;
+                const angle = Math.atan2(deltaY, deltaX);
+
+                // 4. Límite de movimiento de la pupila
+                const maxMove = ojo.offsetWidth / 4; 
+
+                // 5. Calcular la nueva posición (X, Y) dentro del ojo
+                const pupilaX = Math.cos(angle) * maxMove;
+                const pupilaY = Math.sin(angle) * maxMove;
+
+                // 6. Aplicar la transformación de movimiento
+                pupila.style.transform = `translate(-50%, -50%) translate(${pupilaX}px, ${pupilaY}px)`;
+            });
+        });
+    </script>
+</body>
 </html>
